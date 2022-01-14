@@ -36,6 +36,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         
     # Renvoi du résultat (ou de l'erreur)
     if errorMessage != "":
-        return func.HttpResponse(dataString +  + errorMessage, status_code=500)
+        return func.HttpResponse(dataString + errorMessage, status_code=500)
     else:
         return func.HttpResponse(f"Jude Law's birthYear is {birthYear} using Neo4J.")
