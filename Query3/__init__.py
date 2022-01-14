@@ -6,7 +6,6 @@ import os
 import pyodbc as pyodbc
 import azure.functions as func
 
-# QUERY 3: Affichez le noeud représentant l'acteur nommé Jude Law, et visualisez son année de naissance.
 # Language: Neo4J (Cypher)
 # Source: TP 1
 def main(req: func.HttpRequest) -> func.HttpResponse:
@@ -27,7 +26,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     # Connexion à la BDD
     try:
         graph = Graph(neo4j_server, auth=(neo4j_user, neo4j_password))
-        j_names = graph.run("MATCH (j:Name) {primaryName: 'Jude Law'}) RETURN j.birthYear")
+        j_names = graph.run("MATCH (j:Name {primaryName: 'Jude Law'}) RETURN j.birthYear")
         for j_name in j_names:
             birthYear = j_name["j.birthYear"]
 
