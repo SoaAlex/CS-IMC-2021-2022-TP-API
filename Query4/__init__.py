@@ -31,7 +31,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         with pyodbc.connect('DRIVER='+driver+';SERVER=tcp:'+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password) as conn:
             # Execution de la requête
             cursor = conn.cursor()
-            cursor.execute("SELECT AVG(averageRating), genre FROM tGenres AS g JOIN tTitles AS t on t.tconst=g.tconst GROUP BY genre LIMIT 10")
+            cursor.execute("SELECT AVG(averageRating), genre FROM tGenres AS g JOIN tTitles AS t on t.tconst=g.tconst GROUP BY genre")
 
             rows = cursor.fetchall()
             for row in rows:
