@@ -37,9 +37,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     birthYear = ""
 
     # Récupération du nom à rechercher dans la BDD
-    if name:
-        nameMessage = f"Hello, {name}!\n"
-    else:
+    if not name:
         nameMessage = "Le parametre 'name' n'a pas ete fourni lors de l'appel.\n"
  
     # Connexion à la BDD
