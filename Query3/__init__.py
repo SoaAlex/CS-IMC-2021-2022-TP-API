@@ -6,6 +6,7 @@ import os
 import pyodbc as pyodbc
 import azure.functions as func
 
+# QUERY 3: Affichez le noeud représentant l'acteur nommé Jude Law, et visualisez son année de naissance.
 # Language: Neo4J (Cypher)
 # Source: TP 1
 def main(req: func.HttpRequest) -> func.HttpResponse:
