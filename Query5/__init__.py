@@ -14,15 +14,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     actor = req.params.get('name')
     genre = req.params.get('genre')
     director = req.params.get('director')
-    if not actor or not genre or not director:
-        try:
-            req_body = req.get_json()
-        except ValueError:
-            pass
-        else:
-            actor = req_body.get('name')
-            genre = req_body.get('genre')
-            director = req_body.get('director')
 
     # Récupération des infos de connexion à la BDD
     server = os.environ["TPBDD_SERVER"]
@@ -43,7 +34,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         with pyodbc.connect('DRIVER='+driver+';SERVER=tcp:'+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password) as conn:
             # Execution de la requête
             cursor = conn.cursor()
-            cursor.execute("SELECT AVG(averageRating), genre FROM tGenres AS g JOIN tTitles AS t on t.tconst=g WHERE t ")
+            query = f"SELECT AVG(averageRating) FROM tGenres, tTitles, tNames WHERE tNames.primaryName={actor} AND tGenres.genre={genre}"
+            cursor.execute(query)
 
             rows = cursor.fetchall()
             for row in rows:
